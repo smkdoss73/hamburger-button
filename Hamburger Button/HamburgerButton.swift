@@ -11,6 +11,8 @@ import QuartzCore
 import UIKit
 
 class HamburgerButton : UIButton {
+    
+    var hamburgerStrokeColor = UIColor()
     let shortStroke: CGPath = {
         let path = CGMutablePath()
         path.move(to: CGPoint(x: 2, y: 2))
@@ -43,16 +45,16 @@ class HamburgerButton : UIButton {
         super.init(coder: aDecoder)
     }
 
-    override init(frame: CGRect) {
+     init(frame: CGRect, hamburgerStrokeColor: UIColor) {
         super.init(frame: frame)
-
+        self.hamburgerStrokeColor = hamburgerStrokeColor
         self.top.path = shortStroke
         self.middle.path = outline
         self.bottom.path = shortStroke
 
         for layer in [ self.top, self.middle, self.bottom ] {
             layer?.fillColor = nil
-            layer?.strokeColor = UIColor.white.cgColor
+            layer?.strokeColor = hamburgerStrokeColor.cgColor
             layer?.lineWidth = 4
             layer?.miterLimit = 4
             layer?.lineCap = kCALineCapRound
